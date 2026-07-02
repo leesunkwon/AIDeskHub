@@ -1,6 +1,8 @@
 package com.kotlinsun.aideskhub
 
+import android.Manifest
 import android.app.AlertDialog
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,22 +13,29 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import com.kotlinsun.aideskhub.data.LocalGuideRepository
+import com.kotlinsun.aideskhub.BuildConfig
+import com.kotlinsun.aideskhub.ai.GeminiRestClient
 import com.kotlinsun.aideskhub.model.DeskHubScreenState
+import com.kotlinsun.aideskhub.voice.VoiceInteractionController
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
     private val handler = Handler(Looper.getMainLooper())
-    private val repository = LocalGuideRepository()
+    private val geminiClient = GeminiRestClient(BuildConfig.GEMINI_API_KEY)
+    private val aiExecutor = Executors.newSingleThreadExecutor()
     private val timeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.KOREA)
     private val dateFormatter = DateTimeFormatter.ofPattern("yyyy년 M월 d일 EEEE", Locale.KOREA)
+    private lateinit var voiceInteractionController: VoiceInteractionController
 
     private lateinit var kioskContainer: View
     private lateinit var listeningOverlay: View
@@ -39,6 +48,18 @@ class MainActivity : AppCompatActivity() {
     private lateinit var noticeSecondaryText: TextView
     private lateinit var resultAnswerText: TextView
     private lateinit var routeStepText: TextView
+    private lateinit var resultTitleText: TextView
+    private lateinit var listeningStatusText: TextView
+
+    private val requestAudioPermission = registerForActivityResult(
+        ActivityResultContracts.RequestPermission(),
+    ) { granted ->
+        if (granted) {
+            startVoiceQuestion()
+        } else {
+            Toast.makeText(this, "음성 질문을 사용하려면 마이크 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     private val clockRunnable = object : Runnable {
         override fun run() {
@@ -64,6 +85,7 @@ class MainActivity : AppCompatActivity() {
         }
         bindViews()
         bindActions()
+        voiceInteractionController = VoiceInteractionController(this)
         showState(DeskHubScreenState.KioskIdle)
     }
 
@@ -81,9 +103,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onPause() {
+        voiceInteractionController.stopListening()
         handler.removeCallbacks(clockRunnable)
         handler.removeCallbacks(idleReturnRunnable)
         super.onPause()
+    }
+
+    override fun onDestroy() {
+        voiceInteractionController.destroy()
+        aiExecutor.shutdownNow()
+        super.onDestroy()
     }
 
     private fun bindViews() {
@@ -98,14 +127,16 @@ class MainActivity : AppCompatActivity() {
         noticeSecondaryText = findViewById(R.id.noticeSecondaryText)
         resultAnswerText = findViewById(R.id.resultAnswerText)
         routeStepText = findViewById(R.id.routeStepText)
+        resultTitleText = findViewById(R.id.resultTitleText)
+        listeningStatusText = findViewById(R.id.listeningStatusText)
     }
 
     private fun bindActions() {
         findViewById<View>(R.id.listenButton).setOnClickListener {
-            showState(DeskHubScreenState.Listening)
+            requestVoiceQuestion()
         }
         findViewById<View>(R.id.sampleResultButton).setOnClickListener {
-            showSampleResult()
+            submitQuestion("AI Desk Hub는 어떤 앱이야?")
         }
         findViewById<View>(R.id.adminEntryButton).setOnClickListener {
             showAdminPasswordDialog()
@@ -121,7 +152,8 @@ class MainActivity : AppCompatActivity() {
             showState(DeskHubScreenState.KioskIdle)
         }
         listeningOverlay.setOnClickListener {
-            showSampleResult()
+            voiceInteractionController.stopListening()
+            showState(DeskHubScreenState.KioskIdle)
         }
     }
 
@@ -143,10 +175,67 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showSampleResult() {
-        val guide = repository.getSampleRouteGuide()
-        resultAnswerText.text = guide.answer
-        routeStepText.text = guide.routeSteps.firstOrNull() ?: "등록된 길 안내 이미지가 없습니다."
+    private fun requestVoiceQuestion() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) ==
+            PackageManager.PERMISSION_GRANTED
+        ) {
+            startVoiceQuestion()
+        } else {
+            requestAudioPermission.launch(Manifest.permission.RECORD_AUDIO)
+        }
+    }
+
+    private fun startVoiceQuestion() {
+        listeningStatusText.text = "질문을 말씀해 주세요"
+        showState(DeskHubScreenState.Listening)
+        voiceInteractionController.startListening(
+            object : VoiceInteractionController.Listener {
+                override fun onReady() {
+                    listeningStatusText.text = "듣고 있어요"
+                }
+
+                override fun onPartialText(text: String) {
+                    listeningStatusText.text = text
+                }
+
+                override fun onResult(text: String) {
+                    submitQuestion(text)
+                }
+
+                override fun onError(message: String) {
+                    showQuestionError(message)
+                }
+            },
+        )
+    }
+
+    private fun submitQuestion(question: String) {
+        val trimmedQuestion = question.trim()
+        if (trimmedQuestion.isBlank()) {
+            showQuestionError("질문을 인식하지 못했습니다. 다시 말씀해 주세요.")
+            return
+        }
+
+        resultTitleText.text = "AI 답변"
+        routeStepText.text = "질문\n\n$trimmedQuestion"
+        resultAnswerText.text = "답변을 생성하고 있습니다..."
+        showState(DeskHubScreenState.Result)
+
+        aiExecutor.execute {
+            val result = geminiClient.generateAnswer(trimmedQuestion)
+            runOnUiThread {
+                resultAnswerText.text = result.getOrElse { error ->
+                    error.message ?: "답변을 가져오지 못했습니다."
+                }
+                handler.postDelayed(idleReturnRunnable, AUTO_IDLE_DELAY_MS)
+            }
+        }
+    }
+
+    private fun showQuestionError(message: String) {
+        resultTitleText.text = "음성 질문"
+        routeStepText.text = "질문을 처리하지 못했습니다."
+        resultAnswerText.text = message
         showState(DeskHubScreenState.Result)
         handler.postDelayed(idleReturnRunnable, AUTO_IDLE_DELAY_MS)
     }
@@ -172,9 +261,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun renderNotices() {
-        val notices = repository.getSampleNotices()
-        noticePrimaryText.text = notices.firstOrNull().orEmpty()
-        noticeSecondaryText.text = notices.drop(1).firstOrNull().orEmpty()
+        noticePrimaryText.text = getString(R.string.notice_1)
+        noticeSecondaryText.text = getString(R.string.notice_2)
     }
 
     private fun updateClock() {

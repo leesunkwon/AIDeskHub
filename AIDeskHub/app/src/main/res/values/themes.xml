@@ -6,4 +6,18 @@
     </style>
 
     <style name="Theme.AIDeskHub" parent="Base.Theme.AIDeskHub" />
+
+    <style name="AdminMenuCard">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_rowWeight">1</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:background">@color/desk_surface_muted</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">24dp</item>
+        <item name="android:textColor">@color/desk_text</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

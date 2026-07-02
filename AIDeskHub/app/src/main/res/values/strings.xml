@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">AIDeskHub</string>
+    <string name="admin_password">0000</string>
+    <string name="institution_name">AI Desk Hub</string>
+    <string name="kiosk_greeting">무엇을 도와드릴까요?</string>
+    <string name="kiosk_hint">화면을 터치하거나 호출어로 안내를 시작할 수 있습니다.</string>
+    <string name="weather_placeholder">서울 24도 · 맑음</string>
+    <string name="notice_1">방문 안내와 길 찾기를 도와드립니다.</string>
+    <string name="notice_2">기관 운영 시간과 부서 연락처를 물어보세요.</string>
+    <string name="notice_3">관리자 모드에서 안내 데이터를 직접 관리할 수 있습니다.</string>
 </resources>

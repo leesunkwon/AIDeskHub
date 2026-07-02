@@ -2,4 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="desk_background">#F6F8FB</color>
+    <color name="desk_surface">#FFFFFF</color>
+    <color name="desk_surface_muted">#E9EEF5</color>
+    <color name="desk_primary">#145C72</color>
+    <color name="desk_primary_dark">#0B3340</color>
+    <color name="desk_accent">#D98C2B</color>
+    <color name="desk_text">#172026</color>
+    <color name="desk_text_muted">#66737D</color>
+    <color name="desk_divider">#D5DCE5</color>
+    <color name="desk_overlay">#B3000000</color>
 </resources>

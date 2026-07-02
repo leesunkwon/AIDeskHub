@@ -58,14 +58,8 @@ class MainActivity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         setContentView(R.layout.activity_main)
         hideSystemBars()
-        val contentPadding = resources.getDimensionPixelSize(R.dimen.screen_content_padding)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            v.setPadding(
-                contentPadding,
-                contentPadding,
-                contentPadding,
-                contentPadding,
-            )
+            v.setPadding(0, 0, 0, 0)
             insets
         }
         bindViews()

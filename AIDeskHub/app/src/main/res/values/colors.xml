@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="desk_background">#FFFFFFFF</color>
+    <color name="desk_idle_background">#000000</color>
     <color name="desk_surface">#FFFFFF</color>
     <color name="desk_surface_muted">#F5F5F5</color>
     <color name="desk_surface_deep">#111111</color>

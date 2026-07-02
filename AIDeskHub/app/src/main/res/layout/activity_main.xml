@@ -13,33 +13,47 @@
         android:id="@+id/kioskContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/desk_idle_background"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <com.kotlinsun.aideskhub.ui.IdleLineArtView
+            android:id="@+id/idleLineArtView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha="0.98"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/institutionPanel"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/desk_surface"
-            android:padding="@dimen/panel_padding"
+            android:background="@android:color/transparent"
+            android:paddingStart="56dp"
+            android:paddingTop="42dp"
+            android:paddingEnd="@dimen/panel_padding"
+            android:paddingBottom="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/noticePanel"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.62">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/dateText"
                 style="@style/CaptionText"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toStartOf="@id/weatherText"
+                android:layout_marginTop="@dimen/spacing_xs"
+                android:textColor="@color/white"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/timeText"
                 tools:text="2026년 7월 2일 목요일" />
 
             <TextView
@@ -47,95 +61,92 @@
                 style="@style/CaptionText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="end"
+                android:layout_marginTop="@dimen/spacing_sm"
                 android:text="@string/weather_placeholder"
+                android:textColor="@color/desk_text_inverse_muted"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/dateText" />
-
-            <View
-                android:id="@+id/topHairline"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/hairline"
-                android:layout_marginTop="@dimen/spacing_xl"
-                android:background="@color/desk_divider_soft"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/dateText" />
 
             <TextView
                 android:id="@+id/timeText"
                 style="@style/DisplayText"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="96sp"
-                app:layout_constraintBottom_toTopOf="@id/institutionNameText"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="@color/white"
+                android:textSize="58sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_chainStyle="packed"
-                app:layout_constraintTop_toBottomOf="@id/topHairline"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="10:24" />
 
             <TextView
                 android:id="@+id/institutionNameText"
                 style="@style/DisplayText"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_lg"
+                android:layout_marginStart="12dp"
                 android:text="@string/institution_name"
                 android:textAllCaps="true"
-                android:textSize="58sp"
-                app:layout_constraintBottom_toTopOf="@id/greetingText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/timeText" />
+                android:textColor="@color/desk_text_inverse_muted"
+                android:textSize="15sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/weatherText"
+                app:layout_constraintStart_toEndOf="@id/weatherText" />
 
             <TextView
                 android:id="@+id/greetingText"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_md"
+                android:layout_marginStart="@dimen/spacing_sm"
+                android:layout_marginBottom="@dimen/spacing_sm"
                 android:text="@string/kiosk_greeting"
-                android:textColor="@color/desk_text_soft"
-                android:textSize="26sp"
-                app:layout_constraintBottom_toTopOf="@id/kioskHintText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/institutionNameText" />
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/voiceDot" />
+
+            <TextView
+                android:id="@+id/voiceDot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="●"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/greetingText"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/kioskHintText"
                 style="@style/CaptionText"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_sm"
+                android:layout_marginStart="@dimen/spacing_sm"
                 android:text="@string/kiosk_hint"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@id/listenButton"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/greetingText" />
+                android:textColor="@color/desk_text_inverse_muted"
+                android:textSize="14sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/greetingText"
+                app:layout_constraintStart_toEndOf="@id/greetingText" />
 
             <TextView
                 android:id="@+id/listenButton"
                 style="@style/PillButtonPrimary"
-                android:layout_width="0dp"
-                android:layout_marginEnd="@dimen/spacing_md"
-                android:layout_marginTop="@dimen/spacing_xxl"
-                android:text="음성 인식"
+                android:layout_width="136dp"
+                android:layout_marginEnd="@dimen/spacing_sm"
+                android:layout_marginBottom="4dp"
+                android:text="말하기"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/sampleResultButton"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/kioskHintText" />
+                app:layout_constraintTop_toTopOf="@id/sampleResultButton" />
 
             <TextView
                 android:id="@+id/sampleResultButton"
                 style="@style/PillButtonSecondary"
-                android:layout_width="0dp"
-                android:text="샘플 안내"
-                app:layout_constraintBottom_toBottomOf="@id/listenButton"
+                android:layout_width="136dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
+                android:text="안내 보기"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/listenButton"
                 app:layout_constraintTop_toTopOf="@id/listenButton" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -143,12 +154,10 @@
             android:id="@+id/noticePanel"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="@dimen/spacing_sm"
-            android:background="@drawable/bg_dark_tile"
-            android:padding="@dimen/panel_padding"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/institutionPanel"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView

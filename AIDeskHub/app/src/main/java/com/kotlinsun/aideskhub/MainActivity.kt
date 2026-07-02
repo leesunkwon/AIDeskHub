@@ -13,7 +13,9 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.kotlinsun.aideskhub.data.LocalGuideRepository
 import com.kotlinsun.aideskhub.model.DeskHubScreenState
 import java.time.LocalDateTime
@@ -52,17 +54,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         setContentView(R.layout.activity_main)
-        val contentPadding = resources.getDimensionPixelSize(R.dimen.screen_content_padding)
+        hideSystemBars()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(
-                systemBars.left + contentPadding,
-                systemBars.top + contentPadding,
-                systemBars.right + contentPadding,
-                systemBars.bottom + contentPadding,
-            )
+            v.setPadding(0, 0, 0, 0)
             insets
         }
         bindViews()
@@ -72,7 +69,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        hideSystemBars()
         handler.post(clockRunnable)
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) {
+            hideSystemBars()
+        }
     }
 
     override fun onPause() {
@@ -176,6 +181,14 @@ class MainActivity : AppCompatActivity() {
         val now = LocalDateTime.now()
         timeText.text = now.format(timeFormatter)
         dateText.text = now.format(dateFormatter)
+    }
+
+    private fun hideSystemBars() {
+        WindowInsetsControllerCompat(window, window.decorView).let { controller ->
+            controller.hide(WindowInsetsCompat.Type.systemBars())
+            controller.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
     }
 
     companion object {

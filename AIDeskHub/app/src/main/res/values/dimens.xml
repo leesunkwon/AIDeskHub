@@ -11,5 +11,6 @@
     <dimen name="button_height">52dp</dimen>
     <dimen name="button_horizontal_padding">28dp</dimen>
     <dimen name="panel_padding">32dp</dimen>
+    <dimen name="tile_padding">28dp</dimen>
     <dimen name="hairline">1dp</dimen>
 </resources>

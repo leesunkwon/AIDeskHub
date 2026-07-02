@@ -9,159 +9,204 @@
     android:padding="@dimen/screen_content_padding"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/kioskContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/institutionPanel"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="@dimen/spacing_sm"
-            android:layout_weight="3"
+            android:layout_height="0dp"
             android:background="@color/desk_surface"
-            android:gravity="bottom"
-            android:orientation="vertical"
-            android:padding="@dimen/panel_padding">
-
-            <TextView
-                android:id="@+id/timeText"
-                style="@style/DisplayText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="78sp"
-                tools:text="10:24" />
+            android:padding="@dimen/panel_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/noticePanel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.62">
 
             <TextView
                 android:id="@+id/dateText"
                 style="@style/CaptionText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_sm"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@id/weatherText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="2026년 7월 2일 목요일" />
 
             <TextView
                 android:id="@+id/weatherText"
                 style="@style/CaptionText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_lg"
+                android:gravity="end"
                 android:text="@string/weather_placeholder"
-                android:textSize="18sp" />
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/dateText" />
+
+            <View
+                android:id="@+id/topHairline"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/hairline"
+                android:layout_marginTop="@dimen/spacing_xl"
+                android:background="@color/desk_divider_soft"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dateText" />
+
+            <TextView
+                android:id="@+id/timeText"
+                style="@style/DisplayText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="96sp"
+                app:layout_constraintBottom_toTopOf="@id/institutionNameText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintTop_toBottomOf="@id/topHairline"
+                tools:text="10:24" />
 
             <TextView
                 android:id="@+id/institutionNameText"
                 style="@style/DisplayText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_section"
+                android:layout_marginTop="@dimen/spacing_lg"
                 android:text="@string/institution_name"
                 android:textAllCaps="true"
-                android:textSize="54sp" />
+                android:textSize="58sp"
+                app:layout_constraintBottom_toTopOf="@id/greetingText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/timeText" />
 
             <TextView
                 android:id="@+id/greetingText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_md"
                 android:text="@string/kiosk_greeting"
                 android:textColor="@color/desk_text_soft"
-                android:textSize="24sp" />
+                android:textSize="26sp"
+                app:layout_constraintBottom_toTopOf="@id/kioskHintText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/institutionNameText" />
 
             <TextView
                 android:id="@+id/kioskHintText"
                 style="@style/CaptionText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_sm"
                 android:text="@string/kiosk_hint"
-                android:textSize="16sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_xxl"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/listenButton"
-                    style="@style/PillButtonPrimary"
-                    android:layout_width="0dp"
-                    android:layout_marginEnd="@dimen/spacing_md"
-                    android:layout_weight="1"
-                    android:text="음성 인식" />
-
-                <Button
-                    android:id="@+id/sampleResultButton"
-                    style="@style/PillButtonSecondary"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:text="샘플 안내" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/noticePanel"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:background="@color/desk_surface_deep"
-            android:orientation="vertical"
-            android:padding="@dimen/panel_padding">
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/listenButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/greetingText" />
 
             <TextView
+                android:id="@+id/listenButton"
+                style="@style/PillButtonPrimary"
+                android:layout_width="0dp"
+                android:layout_marginEnd="@dimen/spacing_md"
+                android:layout_marginTop="@dimen/spacing_xxl"
+                android:text="음성 인식"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/sampleResultButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/kioskHintText" />
+
+            <TextView
+                android:id="@+id/sampleResultButton"
+                style="@style/PillButtonSecondary"
+                android:layout_width="0dp"
+                android:text="샘플 안내"
+                app:layout_constraintBottom_toBottomOf="@id/listenButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/listenButton"
+                app:layout_constraintTop_toTopOf="@id/listenButton" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/noticePanel"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/spacing_sm"
+            android:background="@drawable/bg_dark_tile"
+            android:padding="@dimen/panel_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/institutionPanel"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/noticeLabelText"
                 style="@style/CaptionText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="공지사항"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/noticePrimaryText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/spacing_section"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
+                android:gravity="bottom"
                 android:text="@string/notice_1"
                 android:textColor="@color/white"
-                android:textSize="36sp"
-                android:textStyle="bold" />
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/noticeSecondaryText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/noticeLabelText" />
 
             <TextView
                 android:id="@+id/noticeSecondaryText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_lg"
                 android:text="@string/notice_2"
                 android:textColor="@color/desk_text_inverse_muted"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                app:layout_constraintBottom_toTopOf="@id/adminEntryButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-            <Button
+            <TextView
                 android:id="@+id/adminEntryButton"
                 style="@style/PillButtonOnDark"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_marginTop="@dimen/spacing_xxl"
-                android:text="관리자 모드" />
-        </LinearLayout>
-    </LinearLayout>
+                android:text="관리자 모드"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/resultContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/desk_surface"
-        android:orientation="vertical"
         android:padding="@dimen/panel_padding"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -169,35 +214,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/resultTitleText"
+            style="@style/DisplayText"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:text="길 안내"
+            android:textSize="48sp"
+            app:layout_constraintEnd_toStartOf="@id/closeResultButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/resultTitleText"
-                style="@style/DisplayText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="길 안내"
-                android:textSize="42sp" />
-
-            <Button
-                android:id="@+id/closeResultButton"
-                style="@style/PillButtonSecondary"
-                android:layout_width="72dp"
-                android:text="X" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/closeResultButton"
+            style="@style/PillButtonIcon"
+            android:layout_width="72dp"
+            android:text="X"
+            app:layout_constraintBottom_toBottomOf="@id/resultTitleText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/resultTitleText" />
 
         <FrameLayout
             android:id="@+id/routeImagePlaceholder"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/spacing_xl"
-            android:layout_weight="1"
-            android:background="@drawable/bg_muted_panel">
+            android:background="@drawable/bg_route_panel"
+            app:layout_constraintBottom_toTopOf="@id/resultAnswerText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/resultTitleText">
 
             <TextView
                 android:id="@+id/routeStepText"
@@ -206,26 +252,28 @@
                 android:gravity="center"
                 android:padding="@dimen/panel_padding"
                 android:textColor="@color/desk_text_muted"
-                android:textSize="26sp"
+                android:textSize="28sp"
                 tools:text="1층 로비에서 오른쪽 복도로 이동하세요." />
         </FrameLayout>
 
         <TextView
             android:id="@+id/resultAnswerText"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_xl"
             android:textColor="@color/desk_text"
             android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             tools:text="학생 식당은 본관 1층 동쪽 복도 끝에 있습니다." />
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/adminContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/desk_surface"
-        android:orientation="vertical"
         android:padding="@dimen/panel_padding"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -233,53 +281,81 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/adminTitleText"
+            style="@style/DisplayText"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:text="관리자 모드"
+            android:textSize="48sp"
+            app:layout_constraintEnd_toStartOf="@id/adminExitButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                style="@style/DisplayText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="관리자 모드"
-                android:textSize="42sp" />
+        <TextView
+            android:id="@+id/adminExitButton"
+            style="@style/PillButtonSecondary"
+            android:layout_width="120dp"
+            android:text="나가기"
+            app:layout_constraintBottom_toBottomOf="@id/adminTitleText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/adminTitleText" />
 
-            <Button
-                android:id="@+id/adminExitButton"
-                style="@style/PillButtonSecondary"
-                android:layout_width="120dp"
-                android:text="나가기" />
-        </LinearLayout>
-
-        <GridLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/adminMenuGrid"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/spacing_xl"
-            android:layout_weight="1"
-            android:columnCount="2"
-            android:rowCount="2">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/adminTitleText">
 
             <TextView
+                android:id="@+id/adminOrgTile"
                 style="@style/AdminMenuCard"
-                android:text="기관 설정\n기관명, 테마, 인사말" />
+                android:layout_marginEnd="@dimen/spacing_sm"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                android:text="기관 설정\n기관명, 테마, 인사말"
+                app:layout_constraintBottom_toTopOf="@id/adminRouteTile"
+                app:layout_constraintEnd_toStartOf="@id/adminKnowledgeTile"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/adminKnowledgeTile"
                 style="@style/AdminMenuCard"
-                android:text="지식 데이터\n운영 시간, 연락처, FAQ" />
+                android:layout_marginStart="@dimen/spacing_sm"
+                android:layout_marginBottom="@dimen/spacing_sm"
+                android:text="지식 데이터\n운영 시간, 연락처, FAQ"
+                app:layout_constraintBottom_toTopOf="@id/adminPorterTile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/adminOrgTile"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/adminRouteTile"
                 style="@style/AdminMenuCard"
-                android:text="길 안내 데이터\n도착지, 사진, 키워드" />
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:layout_marginEnd="@dimen/spacing_sm"
+                android:text="길 안내 데이터\n도착지, 사진, 키워드"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/adminPorterTile"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/adminOrgTile" />
 
             <TextView
+                android:id="@+id/adminPorterTile"
                 style="@style/AdminMenuCard"
-                android:text="Import / Export\nCSV, JSON 백업과 복원" />
-        </GridLayout>
-    </LinearLayout>
+                android:layout_marginStart="@dimen/spacing_sm"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:text="Import / Export\nCSV, JSON 백업과 복원"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/adminRouteTile"
+                app:layout_constraintTop_toBottomOf="@id/adminKnowledgeTile" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
         android:id="@+id/listeningOverlay"
@@ -294,7 +370,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="132dp"
             android:layout_gravity="bottom"
@@ -302,29 +378,36 @@
             android:layout_marginEnd="@dimen/spacing_section"
             android:layout_marginBottom="@dimen/spacing_section"
             android:background="@drawable/bg_pill_on_dark"
-            android:gravity="center"
-            android:orientation="vertical"
             android:padding="@dimen/spacing_xl">
 
             <TextView
                 android:id="@+id/listeningStatusText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="듣고 있어요"
                 android:textColor="@color/desk_text"
                 android:textSize="26sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/waveformText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
                 android:id="@+id/waveformText"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_sm"
                 android:gravity="center"
                 android:text="▁ ▃ ▅ ▇ ▅ ▃ ▁"
                 android:textColor="@color/desk_primary"
-                android:textSize="32sp" />
-        </LinearLayout>
+                android:textSize="32sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/listeningStatusText" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

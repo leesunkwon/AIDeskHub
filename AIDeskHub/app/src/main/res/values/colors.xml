@@ -15,5 +15,7 @@
     <color name="desk_text_inverse_muted">#B7B7B9</color>
     <color name="desk_divider">#CACACB</color>
     <color name="desk_divider_soft">#E5E5E5</color>
+    <color name="desk_pressed_dark">#2A2A2A</color>
+    <color name="desk_pressed_light">#E8E8E8</color>
     <color name="desk_overlay">#B3000000</color>
 </resources>

@@ -25,87 +25,85 @@
             android:id="@+id/institutionPanel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="@dimen/spacing_sm"
             android:layout_weight="3"
             android:background="@color/desk_surface"
-            android:gravity="center_vertical"
+            android:gravity="bottom"
             android:orientation="vertical"
-            android:padding="32dp">
+            android:padding="@dimen/panel_padding">
 
             <TextView
                 android:id="@+id/timeText"
+                style="@style/DisplayText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/desk_primary_dark"
-                android:textSize="56sp"
-                android:textStyle="bold"
+                android:textSize="78sp"
                 tools:text="10:24" />
 
             <TextView
                 android:id="@+id/dateText"
+                style="@style/CaptionText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/desk_text_muted"
-                android:textSize="20sp"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:textSize="18sp"
                 tools:text="2026년 7월 2일 목요일" />
 
             <TextView
                 android:id="@+id/weatherText"
+                style="@style/CaptionText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="@dimen/spacing_lg"
                 android:text="@string/weather_placeholder"
-                android:textColor="@color/desk_accent"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/institutionNameText"
+                style="@style/DisplayText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
+                android:layout_marginTop="@dimen/spacing_section"
                 android:text="@string/institution_name"
-                android:textColor="@color/desk_text"
-                android:textSize="34sp"
-                android:textStyle="bold" />
+                android:textAllCaps="true"
+                android:textSize="54sp" />
 
             <TextView
                 android:id="@+id/greetingText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="@dimen/spacing_md"
                 android:text="@string/kiosk_greeting"
-                android:textColor="@color/desk_text"
-                android:textSize="26sp" />
+                android:textColor="@color/desk_text_soft"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/kioskHintText"
+                style="@style/CaptionText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/spacing_sm"
                 android:text="@string/kiosk_hint"
-                android:textColor="@color/desk_text_muted"
-                android:textSize="17sp" />
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="@dimen/spacing_xxl"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/listenButton"
+                    style="@style/PillButtonPrimary"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_marginEnd="12dp"
+                    android:layout_marginEnd="@dimen/spacing_md"
                     android:layout_weight="1"
                     android:text="음성 인식" />
 
                 <Button
                     android:id="@+id/sampleResultButton"
+                    style="@style/PillButtonSecondary"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
                     android:layout_weight="1"
                     android:text="샘플 안내" />
             </LinearLayout>
@@ -116,28 +114,29 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:background="@color/desk_primary_dark"
+            android:background="@color/desk_surface_deep"
             android:orientation="vertical"
-            android:padding="28dp">
+            android:padding="@dimen/panel_padding">
 
             <TextView
+                style="@style/CaptionText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="공지사항"
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/noticePrimaryText"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="@dimen/spacing_section"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:text="@string/notice_1"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="36sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -145,14 +144,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/notice_2"
-                android:textColor="@color/desk_surface_muted"
-                android:textSize="18sp" />
+                android:textColor="@color/desk_text_inverse_muted"
+                android:textSize="17sp" />
 
             <Button
                 android:id="@+id/adminEntryButton"
+                style="@style/PillButtonOnDark"
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="@dimen/spacing_xxl"
                 android:text="관리자 모드" />
         </LinearLayout>
     </LinearLayout>
@@ -163,7 +162,7 @@
         android:layout_height="0dp"
         android:background="@color/desk_surface"
         android:orientation="vertical"
-        android:padding="28dp"
+        android:padding="@dimen/panel_padding"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -178,18 +177,17 @@
 
             <TextView
                 android:id="@+id/resultTitleText"
+                style="@style/DisplayText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="길 안내"
-                android:textColor="@color/desk_text"
-                android:textSize="28sp"
-                android:textStyle="bold" />
+                android:textSize="42sp" />
 
             <Button
                 android:id="@+id/closeResultButton"
-                android:layout_width="64dp"
-                android:layout_height="52dp"
+                style="@style/PillButtonSecondary"
+                android:layout_width="72dp"
                 android:text="X" />
         </LinearLayout>
 
@@ -197,18 +195,18 @@
             android:id="@+id/routeImagePlaceholder"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="@dimen/spacing_xl"
             android:layout_weight="1"
-            android:background="@color/desk_surface_muted">
+            android:background="@drawable/bg_muted_panel">
 
             <TextView
                 android:id="@+id/routeStepText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:padding="24dp"
+                android:padding="@dimen/panel_padding"
                 android:textColor="@color/desk_text_muted"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 tools:text="1층 로비에서 오른쪽 복도로 이동하세요." />
         </FrameLayout>
 
@@ -216,9 +214,9 @@
             android:id="@+id/resultAnswerText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="@dimen/spacing_xl"
             android:textColor="@color/desk_text"
-            android:textSize="20sp"
+            android:textSize="22sp"
             tools:text="학생 식당은 본관 1층 동쪽 복도 끝에 있습니다." />
     </LinearLayout>
 
@@ -228,7 +226,7 @@
         android:layout_height="0dp"
         android:background="@color/desk_surface"
         android:orientation="vertical"
-        android:padding="28dp"
+        android:padding="@dimen/panel_padding"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -242,18 +240,17 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/DisplayText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="관리자 모드"
-                android:textColor="@color/desk_text"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:textSize="42sp" />
 
             <Button
                 android:id="@+id/adminExitButton"
+                style="@style/PillButtonSecondary"
                 android:layout_width="120dp"
-                android:layout_height="52dp"
                 android:text="나가기" />
         </LinearLayout>
 
@@ -261,7 +258,7 @@
             android:id="@+id/adminMenuGrid"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="@dimen/spacing_xl"
             android:layout_weight="1"
             android:columnCount="2"
             android:rowCount="2">
@@ -299,12 +296,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="132dp"
             android:layout_gravity="bottom"
-            android:background="@color/desk_surface"
+            android:layout_marginStart="@dimen/spacing_section"
+            android:layout_marginEnd="@dimen/spacing_section"
+            android:layout_marginBottom="@dimen/spacing_section"
+            android:background="@drawable/bg_pill_on_dark"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="@dimen/spacing_xl">
 
             <TextView
                 android:id="@+id/listeningStatusText"
@@ -313,14 +313,14 @@
                 android:gravity="center"
                 android:text="듣고 있어요"
                 android:textColor="@color/desk_text"
-                android:textSize="24sp"
+                android:textSize="26sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/waveformText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/spacing_sm"
                 android:gravity="center"
                 android:text="▁ ▃ ▅ ▇ ▅ ▃ ▁"
                 android:textColor="@color/desk_primary"

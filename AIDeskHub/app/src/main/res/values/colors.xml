@@ -2,14 +2,18 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="desk_background">#F6F8FB</color>
+    <color name="desk_background">#FFFFFFFF</color>
     <color name="desk_surface">#FFFFFF</color>
-    <color name="desk_surface_muted">#E9EEF5</color>
-    <color name="desk_primary">#145C72</color>
-    <color name="desk_primary_dark">#0B3340</color>
-    <color name="desk_accent">#D98C2B</color>
-    <color name="desk_text">#172026</color>
-    <color name="desk_text_muted">#66737D</color>
-    <color name="desk_divider">#D5DCE5</color>
+    <color name="desk_surface_muted">#F5F5F5</color>
+    <color name="desk_surface_deep">#111111</color>
+    <color name="desk_primary">#111111</color>
+    <color name="desk_primary_dark">#111111</color>
+    <color name="desk_accent">#111111</color>
+    <color name="desk_text">#111111</color>
+    <color name="desk_text_soft">#39393B</color>
+    <color name="desk_text_muted">#707072</color>
+    <color name="desk_text_inverse_muted">#B7B7B9</color>
+    <color name="desk_divider">#CACACB</color>
+    <color name="desk_divider_soft">#E5E5E5</color>
     <color name="desk_overlay">#B3000000</color>
 </resources>

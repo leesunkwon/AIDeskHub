@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="screen_content_padding">28dp</dimen>
+    <dimen name="screen_content_padding">32dp</dimen>
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">12dp</dimen>
+    <dimen name="spacing_lg">18dp</dimen>
+    <dimen name="spacing_xl">24dp</dimen>
+    <dimen name="spacing_xxl">32dp</dimen>
+    <dimen name="spacing_section">48dp</dimen>
+    <dimen name="button_height">52dp</dimen>
+    <dimen name="button_horizontal_padding">28dp</dimen>
+    <dimen name="panel_padding">32dp</dimen>
+    <dimen name="hairline">1dp</dimen>
 </resources>
